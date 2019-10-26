@@ -18,16 +18,22 @@ public class CallbackTest {
 
     @BeforeEach
     void setUp() {
+
         driver = new ChromeDriver();
     }
+
     @AfterEach
     void tearDown() {
         driver.quit();
         driver = null;
     }
+
     @Test
     void shouldTestSomething() {
-        throw new UnsupportedOperationException();
+
+        //throw new UnsupportedOperationException();
+
+        driver.get("http://localhost:9999");
     }
 
 }
