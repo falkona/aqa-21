@@ -1,19 +1,13 @@
 package ru.netology;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.conditions.ExactText;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.util.HashMap;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -21,13 +15,11 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class CallbackTest {
 
-    //private WebDriver driver;
     private WebDriver driver;
 
     @BeforeAll
     static void setUpAll() {
-        //System.setProperty("webdriver.chrome.driver", "\\seleniumHomework\\artifacts\\chromedriver.exe");
-        WebDriverManager.chromedriver().setup();
+        System.setProperty("webdriver.chrome.driver", "C:\\tmp\\chromedriver.exe");
     }
 
     @BeforeEach
