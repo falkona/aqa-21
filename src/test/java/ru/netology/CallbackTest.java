@@ -58,16 +58,16 @@ public class CallbackTest {
         $("[data-test-id=name]").shouldHave(cssClass("input_invalid"));
     }
 
-    /*@Test
+    @Test
     void shouldBeErrorIfNameIsNotRussian() {
         open("http://localhost:9999");
 
-        $("[data-test-id=name] input").setValue("Дарья");
+        $("[data-test-id=name] input").setValue("Daria");
         $("[data-test-id=phone] input").setValue("+79032596295");
         $("[data-test-id=agreement]").click();
         $(By.tagName("button")).click();
-        $(By.className("input_invalid")).shouldHave(attribute("data-test-id", "name"));
-    }*/
+        $("[data-test-id=name]").shouldHave(cssClass("input_invalid"));
+    }
 
     void sleep(int sec) {
         try {
