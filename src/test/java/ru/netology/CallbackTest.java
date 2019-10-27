@@ -78,7 +78,7 @@ public class CallbackTest {
     void shouldBeErrorIfPhoneIsEmpty() {
         open("http://localhost:9999");
 
-        $("[data-test-id=name] input").setValue("Daria");
+        $("[data-test-id=name] input").setValue("Дарья");
         $("[data-test-id=agreement]").click();
         $(By.tagName("button")).click();
         SelenideElement phone = $("[data-test-id=phone]");
