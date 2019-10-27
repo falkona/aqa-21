@@ -24,7 +24,7 @@ public class CallbackTest {
 
     @BeforeAll
     static void setUpAll() {
-        System.setProperty("webdriver.chrome.driver", "\\artifacts\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "D:\\studies\\seleniumHomework\\artifacts\\chromedriver.exe");
     }
 
     @BeforeEach
