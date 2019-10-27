@@ -11,8 +11,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.exist;
+import java.util.HashMap;
+
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -27,7 +28,6 @@ public class CallbackTest {
 
     @BeforeEach
     void setUp() {
-
         driver = new ChromeDriver();
     }
 
@@ -39,24 +39,35 @@ public class CallbackTest {
 
     @Test
     void shouldBeSuccessIfDataIsCorrect() {
-
         open("http://localhost:9999");
 
         $("[data-test-id=name] input").setValue("Дарья");
-        sleep(1);
+        $("[data-test-id=phone] input").setValue("+79032596295");
+        $("[data-test-id=agreement]").click();
+        $(By.tagName("button")).click();
+        $("[data-test-id=order-success]").should(exist);
+    }
+
+    @Test
+    void shouldBeErrorIfNameIsEmpty() {
+        open("http://localhost:9999");
 
         $("[data-test-id=phone] input").setValue("+79032596295");
-        sleep(1);
-
         $("[data-test-id=agreement]").click();
-        sleep(1);
-
         $(By.tagName("button")).click();
-        sleep(1);
+        $("[data-test-id=name]").shouldHave(cssClass("input_invalid"));
+    }
 
-        $("[data-test-id=order-success]").should(exist);
-        sleep(1);
-     }
+    /*@Test
+    void shouldBeErrorIfNameIsNotRussian() {
+        open("http://localhost:9999");
+
+        $("[data-test-id=name] input").setValue("Дарья");
+        $("[data-test-id=phone] input").setValue("+79032596295");
+        $("[data-test-id=agreement]").click();
+        $(By.tagName("button")).click();
+        $(By.className("input_invalid")).shouldHave(attribute("data-test-id", "name"));
+    }*/
 
     void sleep(int sec) {
         try {
