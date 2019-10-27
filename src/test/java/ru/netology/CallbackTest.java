@@ -24,7 +24,7 @@ public class CallbackTest {
 
     @BeforeAll
     static void setUpAll() {
-        System.setProperty("webdriver.chrome.driver", "C:\\tmp\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "\\artifacts\\chromedriver.exe");
     }
 
     @BeforeEach
@@ -84,6 +84,16 @@ public class CallbackTest {
         SelenideElement phone = $("[data-test-id=phone]");
         phone.shouldHave(cssClass("input_invalid"));
         phone.$(By.className("input__sub")).shouldHave(exactText("Поле обязательно для заполнения"));
+    }
+
+    @Test
+    void shouldBeErrorIfAgreementIsEmpty() {
+        open("http://localhost:9999");
+
+        $("[data-test-id=name] input").setValue("Дарья");
+        $("[data-test-id=phone] input").setValue("+79032596295");
+        $(By.tagName("button")).click();
+        $("[data-test-id=agreement]").shouldHave(cssClass("input_invalid"));
     }
 
     void sleep(int sec) {
