@@ -2,6 +2,7 @@ package ru.netology;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.conditions.ExactText;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -55,7 +56,9 @@ public class CallbackTest {
         $("[data-test-id=phone] input").setValue("+79032596295");
         $("[data-test-id=agreement]").click();
         $(By.tagName("button")).click();
-        $("[data-test-id=name]").shouldHave(cssClass("input_invalid"));
+        SelenideElement name = $("[data-test-id=name]");
+        name.shouldHave(cssClass("input_invalid"));
+        name.$(By.className("input__sub")).shouldHave(exactText("Поле обязательно для заполнения"));
     }
 
     @Test
@@ -66,7 +69,9 @@ public class CallbackTest {
         $("[data-test-id=phone] input").setValue("+79032596295");
         $("[data-test-id=agreement]").click();
         $(By.tagName("button")).click();
-        $("[data-test-id=name]").shouldHave(cssClass("input_invalid"));
+        SelenideElement name = $("[data-test-id=name]");
+        name.shouldHave(cssClass("input_invalid"));
+        name.$(By.className("input__sub")).shouldHave(exactText("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы."));
     }
 
     void sleep(int sec) {
