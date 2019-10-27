@@ -1,5 +1,6 @@
 package ru.netology;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,7 +11,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 public class CallbackTest {
 
@@ -36,39 +40,23 @@ public class CallbackTest {
     @Test
     void shouldBeSuccessIfDataIsCorrect() {
 
-        driver.get("http://localhost:9999");
+        open("http://localhost:9999");
+
+        $("[data-test-id=name] input").setValue("Дарья");
         sleep(1);
 
-        fillWithSelenium();
-    }
-
-    void fillWithSelenium() {
-
-        WebElement name = driver.findElement(By.cssSelector("[data-test-id=name] input"));
-        name.sendKeys("Дарья");
+        $("[data-test-id=phone] input").setValue("+79032596295");
         sleep(1);
 
-        WebElement phone = driver.findElement(By.cssSelector("[data-test-id=phone] input"));
-        phone.sendKeys("+79032596295");
+        $("[data-test-id=agreement]").click();
         sleep(1);
 
-        WebElement agreement = driver.findElement(By.cssSelector("[data-test-id=agreement]"));
-        agreement.click();
+        $(By.tagName("button")).click();
         sleep(1);
 
-        WebElement continueButton = driver.findElement(By.tagName("button"));
-        continueButton.click();
+        $("[data-test-id=order-success]").should(exist);
         sleep(1);
-    }
-
-    /*@Test
-    void shouldBeSuccessIfDataIsCorrectWithSelenide() {
-        SelenideElement form = $(By.className("form"));
-        form.$(By.cssSelector("[data-test-id=name] input")).setValue("Daria");
-
-        SelenideElement name = $(By.cssSelector("[data-test-id=name] input"));
-        name.sendKeys("Дарья");
-     }*/
+     }
 
     void sleep(int sec) {
         try {
