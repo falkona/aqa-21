@@ -74,6 +74,18 @@ public class CallbackTest {
         name.$(By.className("input__sub")).shouldHave(exactText("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы."));
     }
 
+    @Test
+    void shouldBeErrorIfPhoneIsEmpty() {
+        open("http://localhost:9999");
+
+        $("[data-test-id=name] input").setValue("Daria");
+        $("[data-test-id=agreement]").click();
+        $(By.tagName("button")).click();
+        SelenideElement phone = $("[data-test-id=phone]");
+        phone.shouldHave(cssClass("input_invalid"));
+        phone.$(By.className("input__sub")).shouldHave(exactText("Поле обязательно для заполнения"));
+    }
+
     void sleep(int sec) {
         try {
             Thread.sleep(sec * 1000);
